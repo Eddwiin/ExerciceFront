@@ -1,0 +1,17 @@
+@import "variables";
+@import "mixins";
+
+.navbar {
+    background-color: rgba($color: $navbar-color, $alpha: .7);
+    padding: 2rem;
+
+    &__title {
+        color: white;
+        font-style: italic;
+        font-size: 2rem;
+
+        @include respond-to("small") {
+            font-size: 1.3rem;
+        }
+    }
+}
