@@ -1,0 +1,65 @@
+@import "variables";
+
+.autocomplete {
+
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    position: relative;
+    z-index: 10000000;
+
+    &__input {
+        font-size: 1.5rem;
+        padding: .7rem;
+        color: inherit;
+        font-family: inherit;
+        border-radius: 2px;
+        border: .5px solid black;
+        
+        &:focus {
+            outline: none;
+            box-shadow: 0 .3rem 1rem rgba(black, .1);
+            border: 2.3px solid $color-primary;
+        }
+
+        &::placeholder {
+            font-size: 1.6rem;
+        }
+
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        border-top: none;
+        border: 1px solid black;
+        border-bottom-left-radius: .3rem;
+        border-bottom-right-radius: .3rem;
+        max-height: 15rem;
+        overflow-y: auto;
+        overflow-x: hidden;
+        position: absolute;
+        top: 3.6rem;
+        width: 100%;
+        
+
+        &__suggestion {
+            font-size: 1.6rem;
+            padding: 1rem;
+            font-style: italic;
+            position: relative;
+
+            &:hover {
+                cursor: pointer;
+                background-color: $auto-suggestion-color;
+            }
+     
+        }
+    }
+
+
+    &__input:not(:focus) ~ &__content {
+        visibility: hidden;
+        transition-delay: 100ms;
+    }
+}

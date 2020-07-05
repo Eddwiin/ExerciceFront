@@ -8,16 +8,16 @@
 }
 
 html {
-    font-size: 62.5%; // Désormais 1rem = 10px sur chaque navigateur
+    font-size: 62.5%; // Redéfinir 1rem = 10px sur chaque navigateur
 
     @include respond-to("small") {
-        font-size: 56.25%; // 1rem = 9px
-    }
-
-    @include respond-to("medium") {
         font-size: 50%; //1 rem = 8px,
     }
 
+    @include respond-to("medium") {
+        font-size: 56.25%; // 1rem = 9px
+    }
+    
     @include respond-to("large") {
         font-size: 75%; //1rem = 12px
     }

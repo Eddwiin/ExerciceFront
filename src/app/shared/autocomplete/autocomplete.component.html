@@ -1,0 +1,8 @@
+<div class="autocomplete">
+    <input  [(ngModel)]="valueSelected" (input)="searchType($event)" class="autocomplete__input" 
+            name="autocomplete" type="text" [placeholder]="placeholder" />
+    <ul class="autocomplete__content">
+        <li *ngFor="let item of itemsCopy" class="autocomplete__content__suggestion"  #appAutocompleteContent
+                (click)="clickOnSuggestion(item)">{{ item.label }}</li>
+    </ul>
+</div>

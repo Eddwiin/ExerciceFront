@@ -2,7 +2,7 @@
 @import "mixins";
 
 .navbar {
-    background-color: rgba($color: $navbar-color, $alpha: .7);
+    background-color: rgba($color: $color-primary, $alpha: .7);
     padding: 2rem;
 
     &__title {

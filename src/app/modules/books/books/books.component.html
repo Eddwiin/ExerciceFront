@@ -1,0 +1,10 @@
+<div *ngIf="(books$ | async) as books" class="books">
+    <div class="books__autocomplete">
+        <app-autocomplete [items]="convertBooksForAuto(books)" (itemsChangeEvent)="itemsChangeEvent($event)"></app-autocomplete>
+    </div>
+
+    <div class="books__cards">
+
+    </div>
+
+</div>
