@@ -19,7 +19,7 @@
         &:focus {
             outline: none;
             box-shadow: 0 .3rem 1rem rgba(black, .1);
-            border: 2.3px solid $color-primary;
+            border-color: $color-primary;
         }
 
         &::placeholder {
@@ -39,8 +39,9 @@
         overflow-y: auto;
         overflow-x: hidden;
         position: absolute;
-        top: 3.6rem;
+        top: 3.3rem;
         width: 100%;
+        background-color:  #ffffff;
         
 
         &__suggestion {

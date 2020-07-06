@@ -1,10 +1,11 @@
 <div *ngIf="(books$ | async) as books" class="books">
     <div class="books__autocomplete">
-        <!-- <app-autocomplete [items]="convertBooksForAuto(books)" (itemsChangeEvent)="itemsChangeEvent($event)"></app-autocomplete> -->
+        <app-autocomplete   [items]="convertBooksForAuto(books)" (inputChangedEvent)="inputChangedEvent($event)"
+                            (suggestionSelectedEvent)="suggestionSelectedEvent($event)"></app-autocomplete>
     </div>
 
     <div class="books__content">
-        <mat-card *ngFor="let book of books" class="books__content__card"> 
+        <mat-card *ngFor="let book of booksCopy" class="books__content__card"> 
             <mat-card-header>
                 <mat-card-title>{{ book?.title }}</mat-card-title>
             </mat-card-header>

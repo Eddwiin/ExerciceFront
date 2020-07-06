@@ -1,10 +1,44 @@
-.books {
+@import "variables";
+@import "mixins";
+@import "animations";
 
-    padding: 10rem;
+.books {
+    padding: 5rem;
+
+    @include respond-to("small") {
+        padding: 0;
+    }
+
+    &__autocomplete {
+        margin-left: 30%;
+        padding-bottom: 6rem;
+
+        @include respond-to("small") {
+            padding-top: 3rem;
+            padding-bottom: 3rem;
+            margin-left: 0;
+        }
+    
+    }
 
     &__content {
+        animation: showSlowly 2s  ease-out;
         display: grid;
         grid-template-columns: repeat(3,1fr);
+
+ 
+        @include respond-to("medium") {
+            grid-template-columns: repeat(2,1fr);
+        }
+
+        @include respond-to("small") {
+            grid-template-columns: 1fr;
+        }
+
+        @include respond-to("big") {
+            grid-template-columns: repeat(4,1fr);
+        }
+        
         grid-row-gap: 5rem;
 
         &__card {
@@ -25,10 +59,12 @@
             }
 
             &__description {
+                display: block;
                 overflow-y: auto;
                 overflow-x: hidden;
                 height: 20rem;
                 line-height: 2.5rem;
+                letter-spacing: 1.5px;
             }
 
             &__btn {

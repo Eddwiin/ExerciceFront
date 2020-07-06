@@ -1,14 +1,12 @@
 $bp-small: 37.5em;
 $bp-medium: 56.25em;
-$bp-large: 75em;
-$bp-largest: 112.5em;
+$bp-largest: 122.5em;
 
 // source : https://css-tricks.com/snippets/sass/mixin-manage-breakpoints/
 $breakpoints: (
   'small':  ( max-width:  $bp-small ),
   'medium': ( max-width:  $bp-medium ),
-  'large':  ( max-width: $bp-large ),
-  'big':    ( max-width: $bp-largest )
+  'big':    ( min-width: $bp-largest )
 ) !default;
 
 $color-primary: #1285F9;
