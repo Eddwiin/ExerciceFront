@@ -19,8 +19,8 @@ export class AutocompleteComponent implements OnInit, OnChanges {
   valueSelected = '';
   closeContent = true;
 
-  @Output() itemsChangeEvent = new EventEmitter();
-  @Output() valueSelectedEvent = new EventEmitter();
+  @Output() inputChangedEvent = new EventEmitter();
+  @Output() suggestionSelectedEvent = new EventEmitter();
 
 
   constructor() { }
@@ -42,12 +42,12 @@ export class AutocompleteComponent implements OnInit, OnChanges {
       }
     });
 
-    this.itemsChangeEvent.emit(this.itemsCopy);
+    this.inputChangedEvent.emit(this.itemsCopy);
   }
 
   clickOnSuggestion(item: AutocompleteData) {
     this.valueSelected = item.label;
-    this.valueSelectedEvent.emit(item);
+    this.suggestionSelectedEvent.emit(item);
   }
 
 }

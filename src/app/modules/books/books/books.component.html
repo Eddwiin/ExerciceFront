@@ -1,10 +1,21 @@
 <div *ngIf="(books$ | async) as books" class="books">
     <div class="books__autocomplete">
-        <app-autocomplete [items]="convertBooksForAuto(books)" (itemsChangeEvent)="itemsChangeEvent($event)"></app-autocomplete>
+        <!-- <app-autocomplete [items]="convertBooksForAuto(books)" (itemsChangeEvent)="itemsChangeEvent($event)"></app-autocomplete> -->
     </div>
 
-    <div class="books__cards">
+    <div class="books__content">
+        <mat-card *ngFor="let book of books" class="books__content__card"> 
+            <mat-card-header>
+                <mat-card-title>{{ book?.title }}</mat-card-title>
+            </mat-card-header>
+            <img mat-card-image class="books__content__card__img" [src]="book.cover" [alt]="book.title">
+            <mat-card-content>
+                <p class="books__content__card__description"> {{ book?.synopsis }}</p>
+            </mat-card-content>
 
+            <mat-card-actions class="books__content__card__btn">
+                <button mat-button color="primary">Acheter</button>
+              </mat-card-actions>
+        </mat-card>
     </div>
-
 </div>
