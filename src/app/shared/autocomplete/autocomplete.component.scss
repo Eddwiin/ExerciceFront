@@ -19,7 +19,6 @@
         &:focus {
             outline: none;
             box-shadow: 0 .3rem 1rem rgba(black, .1);
-            border-color: $color-primary;
         }
 
         &::placeholder {

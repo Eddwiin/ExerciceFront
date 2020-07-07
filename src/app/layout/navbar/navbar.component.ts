@@ -1,14 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ShoppingBadgeNotifService } from '@core/services/shopping-badge-notif.service';
+import { untilDestroyed } from 'ngx-take-until-destroy';
+import { Router } from '@angular/router';
+import { APP_ROUTES } from '../../core/configs/routes.config';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit, OnDestroy {
 
-  constructor() { }
+  nbItemsBadge = 0;
 
-  ngOnInit(): void {}
+  constructor(private __shoppingBadgeNotif: ShoppingBadgeNotifService, private router: Router) { }
 
+  ngOnInit(): void {
+    this.__shoppingBadgeNotif.nbItems$
+      .pipe(untilDestroyed(this))
+      .subscribe(nb => this.nbItemsBadge = nb);
+  }
+
+  navigateToHome() {
+    this.router.navigate([APP_ROUTES.APP_DEFAULT]);
+  }
+  ngOnDestroy() {}
 }

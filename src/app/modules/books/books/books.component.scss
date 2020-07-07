@@ -12,9 +12,10 @@
     &__autocomplete {
         margin-left: 30%;
         padding-bottom: 6rem;
+        padding-top: 6rem;
 
         @include respond-to("small") {
-            padding-top: 3rem;
+            padding-top: 10rem;
             padding-bottom: 3rem;
             margin-left: 0;
         }

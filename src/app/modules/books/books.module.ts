@@ -6,6 +6,7 @@ import { BooksComponent } from './books/books.component';
 import { SharedModule } from '../../shared/shared.module';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [BooksComponent],
@@ -14,7 +15,8 @@ CommonModule,
     BooksRoutingModule,
     SharedModule,
     MatCardModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSnackBarModule
   ]
 })
 export class BooksModule { }

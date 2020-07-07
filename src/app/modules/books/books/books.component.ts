@@ -1,8 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { BookModel } from '@core/resources/book/book.model';
-import { BookService } from '@core/resources/book/book.service';
+import { BookModel } from '@core/models/book.model';
 import { Observable } from 'rxjs/internal/Observable';
-import { map } from 'rxjs/internal/operators/map';
+import { Store } from '@ngrx/store';
+import { AppState } from '@app/app.state';
+import { iif } from 'rxjs';
+import { mergeMap, map } from 'rxjs/operators';
+import { BookService } from '@core/services/book.service';
+import * as ShoppingCartActions from '@core/actions/shopping-cart.actions';
+import { ShoppingBadgeNotifService } from '@core/services/shopping-badge-notif.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-books',
@@ -14,13 +20,15 @@ export class BooksComponent implements OnInit {
   books$: Observable<BookModel[]>;
   booksCopy: BookModel[];
 
-  constructor(private bookService: BookService) {}
+  constructor(  private _book: BookService, private store: Store<AppState>, private _shoppingBadgeNotif: ShoppingBadgeNotifService,
+                private _snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
-    this.books$ = this.bookService.getBooks()
-                    .pipe(
-                      map((books: BookModel[]) => this.booksCopy = [...books] )
-                    );
+
+    this.books$ = this.store.select('books').pipe(
+       mergeMap((books: BookModel[]) =>  iif(() => books.length === 0, this._book.getBooks(), this.store.select('books'))),
+       map((books: BookModel[]) =>  this.booksCopy = [...books])
+    );
   }
 
   convertBooksForAuto = (books: BookModel[]) => books.map((book: BookModel) =>
@@ -28,5 +36,13 @@ export class BooksComponent implements OnInit {
 
   inputChangedEvent = (books: BookModel[]) => this.booksCopy = [...books];
 
-  suggestionSelectedEvent = (book: BookModel) => this.booksCopy = [book];
+  suggestionSelectedEvent = (book) => this.booksCopy = [book];
+
+  addInShoppingCart(book: BookModel) {
+    this.store.dispatch(new ShoppingCartActions.AddInShoppingCart(book));
+    this._shoppingBadgeNotif.updateItem(1);
+    this._snackBar.open("Le livre a été ajouté dans votre panier !", undefined, {
+      duration: 1000
+    });
+  }
 }
