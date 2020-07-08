@@ -1,4 +1,12 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  OnChanges,
+  SimpleChanges,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 
 interface AutocompleteData {
   id: string | number;
@@ -8,10 +16,9 @@ interface AutocompleteData {
 @Component({
   selector: 'app-autocomplete',
   templateUrl: './autocomplete.component.html',
-  styleUrls: ['./autocomplete.component.scss']
+  styleUrls: ['./autocomplete.component.scss'],
 })
 export class AutocompleteComponent implements OnInit, OnChanges {
-
   @Input() items: AutocompleteData[];
   @Input() placeholder = 'Search...';
 
@@ -22,11 +29,9 @@ export class AutocompleteComponent implements OnInit, OnChanges {
   @Output() inputChangedEvent = new EventEmitter();
   @Output() suggestionSelectedEvent = new EventEmitter();
 
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.items && !this.itemsCopy) {
@@ -34,9 +39,8 @@ export class AutocompleteComponent implements OnInit, OnChanges {
     }
   }
 
-
   searchType(event) {
-    this.itemsCopy = this.items.filter(item => {
+    this.itemsCopy = this.items.filter((item) => {
       if (item.label.toLowerCase().includes(event.target.value.toLowerCase())) {
         return item;
       }
@@ -49,5 +53,4 @@ export class AutocompleteComponent implements OnInit, OnChanges {
     this.valueSelected = item.label;
     this.suggestionSelectedEvent.emit(item);
   }
-
 }

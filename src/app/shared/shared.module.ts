@@ -5,10 +5,7 @@ import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AutocompleteComponent],
-  imports: [
-  CommonModule,
-    FormsModule
-  ],
-  exports: [AutocompleteComponent, FormsModule]
+  imports: [CommonModule, FormsModule],
+  exports: [AutocompleteComponent, FormsModule],
 })
-export class SharedModule { }
+export class SharedModule {}

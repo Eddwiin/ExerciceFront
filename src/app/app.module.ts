@@ -6,17 +6,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LayoutModule } from './layout/layout.module';
 import { StoreModule } from '@ngrx/store';
-import { bookReducer } from '@core/reducers/book.reducer';
+import { bookReducer } from '@core/reducers/book.reducer';
 import { shoppingCartReducer } from '@core/reducers/shopping-cart.reducer';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { HttpErrorInterceptor } from '@core/interceptors/http-error.interceptor';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { HttpErrorInterceptor } from '@core/interceptors/http-error.interceptor';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -24,18 +22,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CoreModule,
     LayoutModule,
     StoreModule.forRoot({
-      books: bookReducer,
-      shoppingCart: shoppingCartReducer
+      books: bookReducer,
+      shoppingCart: shoppingCartReducer,
     }),
-    MatSnackBarModule
+    MatSnackBarModule,
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpErrorInterceptor,
-      multi: true
-    }
+      multi: true,
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

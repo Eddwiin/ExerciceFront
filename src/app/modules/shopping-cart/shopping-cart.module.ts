@@ -3,9 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { ShoppingCartRoutingModule } from './shopping-cart-routing.module';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
-import {MatButtonModule} from '@angular/material/button';
-import {MatIconModule} from '@angular/material/icon';
-
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [ShoppingCartComponent],
@@ -13,7 +12,7 @@ import {MatIconModule} from '@angular/material/icon';
     CommonModule,
     ShoppingCartRoutingModule,
     MatButtonModule,
-    MatIconModule
-  ]
+    MatIconModule,
+  ],
 })
-export class ShoppingCartModule { }
+export class ShoppingCartModule {}

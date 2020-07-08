@@ -1,22 +1,32 @@
 <div *ngIf="(books$ | async) as books" class="books">
-    <div class="books__autocomplete">
-        <app-autocomplete   [items]="convertBooksForAuto(books)" (inputChangedEvent)="inputChangedEvent($event)"
-                            (suggestionSelectedEvent)="suggestionSelectedEvent($event)"></app-autocomplete>
-    </div>
+  <div class="books__autocomplete">
+    <app-autocomplete
+      [items]="convertBooksForAuto(books)"
+      (inputChangedEvent)="inputChangedEvent($event)"
+      (suggestionSelectedEvent)="suggestionSelectedEvent($event)"
+    ></app-autocomplete>
+  </div>
 
-    <div class="books__content">
-        <mat-card *ngFor="let book of booksCopy" class="books__content__card"> 
-            <mat-card-header>
-                <mat-card-title>{{ book?.title }}</mat-card-title>
-            </mat-card-header>
-            <img mat-card-image class="books__content__card__img" [src]="book.cover" [alt]="book.title">
-            <mat-card-content>
-                <p class="books__content__card__description"> {{ book?.synopsis }}</p>
-            </mat-card-content>
+  <div class="books__content">
+    <mat-card *ngFor="let book of booksCopy" class="books__content__card">
+      <mat-card-header>
+        <mat-card-title>{{ book?.title }}</mat-card-title>
+      </mat-card-header>
+      <img
+        mat-card-image
+        class="books__content__card__img"
+        [src]="book.cover"
+        [alt]="book.title"
+      />
+      <mat-card-content>
+        <p class="books__content__card__description">{{ book?.synopsis }}</p>
+      </mat-card-content>
 
-            <mat-card-actions class="books__content__card__btn">
-                <button (click)="addInShoppingCart(book)" mat-button color="primary">Acheter</button>
-              </mat-card-actions>
-        </mat-card>
-    </div>
+      <mat-card-actions class="books__content__card__btn">
+        <button (click)="addInShoppingCart(book)" mat-button color="primary">
+          Acheter
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
 </div>

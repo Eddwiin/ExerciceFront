@@ -1,65 +1,71 @@
 @import "variables";
+@import "mixins";
 
 .autocomplete {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
 
+  @include respond-to("medium") {
+    width: 70%;
+  }
+
+  @include respond-to("small") {
+    margin-left: 6rem;
+  }
+
+  position: relative;
+  z-index: 10000000;
+
+  &__input {
+    font-size: 1.5rem;
+    padding: 0.7rem;
+    color: inherit;
+    font-family: inherit;
+    border-radius: 2px;
+    border: 0.5px solid black;
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0.3rem 1rem rgba(black, 0.1);
+    }
+
+    &::placeholder {
+      font-size: 1.6rem;
+    }
+  }
+
+  &__content {
     display: flex;
     flex-direction: column;
-    width: 50%;
-    position: relative;
-    z-index: 10000000;
+    border-top: none;
+    border: 1px solid black;
+    border-bottom-left-radius: 0.3rem;
+    border-bottom-right-radius: 0.3rem;
+    max-height: 15rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: absolute;
+    top: 3.3rem;
+    width: 100%;
+    background-color: #ffffff;
+    list-style: none;
 
-    &__input {
-        font-size: 1.5rem;
-        padding: .7rem;
-        color: inherit;
-        font-family: inherit;
-        border-radius: 2px;
-        border: .5px solid black;
-        
-        &:focus {
-            outline: none;
-            box-shadow: 0 .3rem 1rem rgba(black, .1);
-        }
+    &__suggestion {
+      font-size: 1.6rem;
+      padding: 1rem;
+      font-style: italic;
+      position: relative;
 
-        &::placeholder {
-            font-size: 1.6rem;
-        }
-
+      &:hover {
+        cursor: pointer;
+        background-color: $auto-suggestion-color;
+      }
     }
+  }
 
-    &__content {
-        display: flex;
-        flex-direction: column;
-        border-top: none;
-        border: 1px solid black;
-        border-bottom-left-radius: .3rem;
-        border-bottom-right-radius: .3rem;
-        max-height: 15rem;
-        overflow-y: auto;
-        overflow-x: hidden;
-        position: absolute;
-        top: 3.3rem;
-        width: 100%;
-        background-color:  #ffffff;
-        list-style:none;
-        
-        &__suggestion {
-            font-size: 1.6rem;
-            padding: 1rem;
-            font-style: italic;
-            position: relative;
-
-            &:hover {
-                cursor: pointer;
-                background-color: $auto-suggestion-color;
-            }
-     
-        }
-    }
-
-
-    &__input:not(:focus) ~ &__content {
-        visibility: hidden;
-        transition-delay: 100ms;
-    }
+  &__input:not(:focus) ~ &__content {
+    visibility: hidden;
+    transition-delay: 100ms;
+  }
 }

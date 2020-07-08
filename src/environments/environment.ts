@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  url: 'http://henri-potier.xebia.fr'
+  url: 'http://henri-potier.xebia.fr',
 };
 
 /*

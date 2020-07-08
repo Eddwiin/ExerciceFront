@@ -3,20 +3,20 @@ import { CommonModule } from '@angular/common';
 
 import { BooksRoutingModule } from './books-routing.module';
 import { BooksComponent } from './books/books.component';
-import { SharedModule } from '../../shared/shared.module';
-import {MatCardModule} from '@angular/material/card';
-import {MatButtonModule} from '@angular/material/button';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { SharedModule } from '@shared/shared.module';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [BooksComponent],
   imports: [
-CommonModule,
+    CommonModule,
     BooksRoutingModule,
     SharedModule,
     MatCardModule,
     MatButtonModule,
-    MatSnackBarModule
-  ]
+    MatSnackBarModule,
+  ],
 })
-export class BooksModule { }
+export class BooksModule {}

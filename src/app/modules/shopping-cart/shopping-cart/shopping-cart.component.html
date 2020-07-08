@@ -1,27 +1,47 @@
 <div class="shopping-cart">
-    <div class="shopping-cart__header">
-        Votre panier
+  <div class="shopping-cart__header">
+    Votre panier
+  </div>
+
+  <ng-container *ngIf="shoppingCart$ | async as shoppingCart">
+    <div class="shopping-cart__content">
+      <div
+        *ngFor="let shop of shoppingCart.bookGroup"
+        class="shopping-cart__content__item"
+      >
+        <span class="shopping-cart__content__item__title">{{
+          shop.book.title
+        }}</span>
+        <span class="shopping-cart__content__item__price"
+          >{{ shop.book.price | currency: "EUR" }} (x{{ shop.qt }})</span
+        >
+        <span
+          class="shopping-cart__content__item__close"
+          (click)="removeInShopCart(shop.book, shop.qt)"
+          ><mat-icon [matBadge]="nbItemsBadge" matBadgeColor="warn"
+            >close</mat-icon
+          ></span
+        >
+      </div>
     </div>
 
-    <ng-container *ngIf="(shoppingCart$ | async) as shoppingCart">
-        <div class="shopping-cart__content" >
-            <div *ngFor="let shop of shoppingCart.bookGroup" class="shopping-cart__content__item">
-                <span class="shopping-cart__content__item__title">{{ shop.book.title }}</span>
-                <span class="shopping-cart__content__item__price">{{ shop.book.price | currency: 'EUR' }} (x{{ shop.qt }})</span>
-                <span class="shopping-cart__content__item__close" (click)="removeInShopCart(shop.book, shop.qt)"><mat-icon [matBadge]="nbItemsBadge" matBadgeColor="warn">close</mat-icon></span>
-            </div>
-        </div>
-
-        <ng-template [ngIf]="shoppingCart.bookGroup.length > 0">
-            <div class="shopping-cart__footer">
-                <span class="shopping-cart__footer__price-total" >Montant total: {{ totalPrice | currency: 'EUR' }}</span>
-                <span  class="shopping-cart__footer__reduction">Réduction: {{shoppingCart.reduction | currency: 'EUR' }} </span>
-                <button  mat-stroked-button color="primary" (click)="submit()" class="shopping-cart__footer__btn">Payer  {{ shoppingCart.finalPrice | currency: 'EUR' }}</button>
-            </div>
-        </ng-template>
-
-    </ng-container>
-
-
- 
+    <ng-template [ngIf]="shoppingCart.bookGroup.length > 0">
+      <div class="shopping-cart__footer">
+        <span class="shopping-cart__footer__price-total"
+          >Montant total: {{ totalPrice | currency: "EUR" }}</span
+        >
+        <span class="shopping-cart__footer__reduction"
+          >Réduction: {{ shoppingCart.reduction | currency: "EUR" }}
+        </span>
+        <button
+          mat-stroked-button
+          color="primary"
+          (click)="submit()"
+          class="shopping-cart__footer__btn"
+        >
+          Payer {{ shoppingCart.finalPrice | currency: "EUR" }}
+        </button>
+      </div>
+    </ng-template>
+  </ng-container>
 </div>

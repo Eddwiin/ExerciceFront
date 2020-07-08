@@ -1,30 +1,35 @@
 import { Injectable } from '@angular/core';
-import { BookModel } from '../models/book.model';
-import {  Observable, from, of, empty } from 'rxjs';
+import { BookModel } from '@core/models/book.model';
+import { Observable, from} from 'rxjs';
 import * as _ from 'lodash';
-import { groupBy, mergeMap, toArray, map, pluck, switchMap } from 'rxjs/operators';
+import {
+  groupBy,
+  mergeMap,
+  toArray,
+  map,
+  pluck
+} from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../environments/environment';
-import { ShoppingCartModel, Offer } from '../models/shopping-cart.model';
+import { environment } from '@env/environment';
+import { ShoppingCartModel, Offer } from '@core/models/shopping-cart.model';
 
 export type BooksGroupByTitle = {
-  book: BookModel,
-  qt: number
+  book: BookModel;
+  qt: number;
 };
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ShoppingCartService {
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   groupByTitle(books: BookModel[]): Observable<BooksGroupByTitle[]> {
     return from(books).pipe(
-      groupBy(book => book.title),
-      mergeMap(group => group.pipe(toArray())),
-      map(g => {
-        return  {
+      groupBy((book) => book.title),
+      mergeMap((group) => group.pipe(toArray())),
+      map((g) => {
+        return {
           book: {
             isbn: g[0].isbn,
             title: g[0].title,
@@ -32,26 +37,23 @@ export class ShoppingCartService {
             cover: g[0].cover,
             synopsis: g[0].synopsis,
           },
-          qt: g.length
+          qt: g.length,
         };
       }),
       toArray()
     );
   }
 
-  getReduction(reductions: ShoppingCartModel, totalPrice: number): Observable<number>  {
-    return of(reductions).pipe(
-      pluck('offers'),
-      map((offer: Offer[]) => Math.max.apply(Math, offer.map(o => o.value)) )
+  getReduction(ids: string[]): Observable<number> {
+    return this.http
+      .get<ShoppingCartModel>(
+        `${environment.url}/books/${ids.join()}/commercialOffers`
+      )
+      .pipe(
+        map((reduction: ShoppingCartModel) => reduction),
+        pluck('offers'),
+        map((offer: Offer[]) => Math.max.apply(Math, offer.map((o) => o.value))
+      )
     );
-  }
-
-  getFinalAmount(ids: string[], totalPrice: number): Observable<{ finalPrice: number; reduction: number}>{
-
-    return this.http.get<ShoppingCartModel>(`${environment.url}/books/${ids.join()}/commercialOffers`)
-            .pipe(
-              switchMap((reduction: ShoppingCartModel) => this.getReduction(reduction, totalPrice)),
-              switchMap(reduction => of({ finalPrice: totalPrice - reduction, reduction}))
-            );
   }
 }

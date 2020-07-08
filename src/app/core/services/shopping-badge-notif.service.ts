@@ -2,17 +2,17 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ShoppingBadgeNotifService {
-
   nbItemsSubject = new BehaviorSubject<number>(0);
   nbItems$ = this.nbItemsSubject.asObservable();
 
-  constructor() { }
+  constructor() {}
 
-  addItem = (nb: number = 1) => this.nbItemsSubject.next(this.nbItemsSubject.getValue() + nb);
-  removeItem = (nb: number = 1) => this.nbItemsSubject.next(this.nbItemsSubject.getValue() - nb);
+  addItem = (nb: number = 1) =>
+    this.nbItemsSubject.next(this.nbItemsSubject.getValue() + nb);
+  removeItem = (nb: number = 1) =>
+    this.nbItemsSubject.next(this.nbItemsSubject.getValue() - nb);
   clearBadge = () => this.nbItemsSubject.next(0);
-
 }

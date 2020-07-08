@@ -1,8 +1,11 @@
 <div class="navbar">
-    <h2 class="navbar__title" (click)="navigateToHome()">La bibliothèque d'Henri Potier</h2>
-    
-    <div class="navbar__shop-icon" (click)="navigateToShoppingCart()">
-        <mat-icon [matBadge]="nbItemsBadge" matBadgeColor="warn">shopping_cart </mat-icon>
-    </div>
+  <h2 class="navbar__title" (click)="navigateToHome()">
+    La bibliothèque d'Henri Potier
+  </h2>
 
+  <div class="navbar__shop-icon" (click)="navigateToShoppingCart()">
+    <mat-icon [matBadge]="nbItemsBadge" matBadgeColor="warn"
+      >shopping_cart
+    </mat-icon>
+  </div>
 </div>

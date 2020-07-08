@@ -4,12 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [],
-  imports: [
-    CommonModule,
-    HttpClientModule
-  ],
-  exports: [
-    HttpClientModule
-  ]
+  imports: [CommonModule, HttpClientModule],
+  exports: [HttpClientModule],
 })
-export class CoreModule { }
+export class CoreModule {}

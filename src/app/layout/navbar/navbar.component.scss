@@ -2,35 +2,33 @@
 @import "mixins";
 
 .navbar {
-    background-color: $color-primary;
-    padding: 2rem;
-    display: flex;
-    justify-content: space-between;
-    position: fixed;
-    z-index: 5000000000;
-    width: 100%;
+  background-color: $color-primary;
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  z-index: 5000000000;
+  width: 100%;
 
-    &__title {
-        color: white;
-        font-style: italic;
-        font-size: 2rem;
+  &__title {
+    color: white;
+    font-style: italic;
+    font-size: 2rem;
 
-        @include respond-to("small") {
-            font-size: 1.3rem;
-        }
-
-        &:hover {
-            cursor: pointer;
-            transform: scale(1.05);
-        }
+    @include respond-to("small") {
+      font-size: 1.3rem;
     }
 
-    &__shop-icon {
-        color: white;
-        padding-right: 1rem;
-        &:hover {
-            cursor: pointer;
-            transform: scale(1.2);
-        }
+    &:hover {
+      @include scale(1.05);
     }
+  }
+
+  &__shop-icon {
+    color: white;
+    padding-right: 1rem;
+    &:hover {
+      @include scale(1.2);
+    }
+  }
 }
