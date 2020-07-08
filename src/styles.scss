@@ -77,6 +77,8 @@ $ExericeFront-theme: mat-light-theme((
     box-sizing: inherit;
 }
 
+html, body { height: 100%; }
+
 html {
     font-size: 62.5%; // Redéfinir 1rem = 10px sur chaque navigateur
 
@@ -95,8 +97,7 @@ html {
 
 body {
     box-sizing: border-box;
+    background-color: $background-color
 }
-html, body { height: 100%; }
-body { background-color: $background-color}
 
-html, body { height: 100%; }
+

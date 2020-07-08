@@ -3,7 +3,7 @@ import { BookModel } from '@core/models/book.model';
 import { Observable } from 'rxjs/internal/Observable';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app.state';
-import { iif } from 'rxjs';
+import { iif, of } from 'rxjs';
 import { mergeMap, map } from 'rxjs/operators';
 import { BookService } from '@core/services/book.service';
 import * as ShoppingCartActions from '@core/actions/shopping-cart.actions';
@@ -26,7 +26,7 @@ export class BooksComponent implements OnInit {
   ngOnInit(): void {
 
     this.books$ = this.store.select('books').pipe(
-       mergeMap((books: BookModel[]) =>  iif(() => books.length === 0, this._book.getBooks(), this.store.select('books'))),
+       mergeMap((books: BookModel[]) =>  iif(() => books.length === 0, this._book.getBooks(), of(books))),
        map((books: BookModel[]) =>  this.booksCopy = [...books])
     );
   }

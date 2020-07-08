@@ -23,6 +23,7 @@
     "@angular/router": "~10.0.2",
     "@datorama/akita": "^5.1.1",
     "@ngrx/store": "^9.2.0",
+    "lodash": "^4.17.17",
     "ngx-take-until-destroy": "^5.4.0",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",

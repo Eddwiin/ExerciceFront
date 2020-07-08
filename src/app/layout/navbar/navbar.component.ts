@@ -13,16 +13,16 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   nbItemsBadge = 0;
 
-  constructor(private __shoppingBadgeNotif: ShoppingBadgeNotifService, private router: Router) { }
+  constructor(private _shoppingBadgeNotif: ShoppingBadgeNotifService, private router: Router) { }
 
   ngOnInit(): void {
-    this.__shoppingBadgeNotif.nbItems$
+    this._shoppingBadgeNotif.nbItems$
       .pipe(untilDestroyed(this))
       .subscribe(nb => this.nbItemsBadge = nb);
   }
 
-  navigateToHome() {
-    this.router.navigate([APP_ROUTES.APP_DEFAULT]);
-  }
+  navigateToHome = () => this.router.navigate([APP_ROUTES.APP_DEFAULT]);
+  navigateToShoppingCart = () => this.router.navigate([APP_ROUTES.SHOPPING_CART]);
+
   ngOnDestroy() {}
 }

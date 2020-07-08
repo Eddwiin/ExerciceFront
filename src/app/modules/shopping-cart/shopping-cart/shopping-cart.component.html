@@ -1,0 +1,20 @@
+<div class="shopping-cart">
+    <div class="shopping-cart__header">
+        Votre panier
+    </div>
+
+    <div *ngIf="(shoppingCart$ | async) as shoppingCart" class="shopping-cart__content" >
+        <div *ngFor="let shop of shoppingCart" class="shopping-cart__content__item">
+            <span class="shopping-cart__content__item__title">{{ shop.book.title }}</span>
+            <span class="shopping-cart__content__item__price">{{ shop.book.price | currency: 'EUR' }} (x{{ shop.qt}})</span>
+            <span class="shopping-cart__content__item__close" (click)="removeInShopCart(shop.book)"><mat-icon [matBadge]="nbItemsBadge" matBadgeColor="warn">close</mat-icon></span>
+        </div>
+    </div>
+
+    <div class="shopping-cart__footer">
+        <span class="shopping-cart__footer__price-total" >Montant total: €39.30</span>
+        <span  class="shopping-cart__footer__reduction">Réduction: -12.30€</span>
+        <span class="shopping-cart__footer__price-final"> Montant final: 27.00€ </span>
+        <!-- <button mat-button color="primary">Acheter</button>  -->
+    </div>
+</div>

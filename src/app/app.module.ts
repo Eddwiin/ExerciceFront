@@ -8,14 +8,18 @@ import { LayoutModule } from './layout/layout.module';
 import { StoreModule } from '@ngrx/store';
 import { bookReducer } from '@core/reducers/book.reducer';
 import { shoppingCartReducer } from '@core/reducers/shopping-cart.reducer';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpErrorInterceptor } from '@core/interceptors/http-error.interceptor';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-  BrowserModule,
+    BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     CoreModule,
     LayoutModule,
@@ -23,9 +27,15 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
       books: bookReducer,
       shoppingCart: shoppingCartReducer
     }),
-    NoopAnimationsModule
+    MatSnackBarModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

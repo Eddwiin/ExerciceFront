@@ -3,11 +3,10 @@ import { CommonModule } from '@angular/common';
 import { AutocompleteComponent } from './autocomplete/autocomplete.component';
 import { FormsModule } from '@angular/forms';
 
-
 @NgModule({
   declarations: [AutocompleteComponent],
   imports: [
-    CommonModule,
+  CommonModule,
     FormsModule
   ],
   exports: [AutocompleteComponent, FormsModule]
