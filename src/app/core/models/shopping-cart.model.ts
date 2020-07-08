@@ -4,12 +4,12 @@ enum ShoppingCartEnum {
     SLICE = 'slice'
 }
 
+export interface Offer {
+    type: ShoppingCartEnum;
+    value: number;
+    slicevalue?: number;
+}
+
 export interface ShoppingCartModel {
-    offers: [
-        {
-            type: ShoppingCartEnum;
-            value: number;
-            slicevalue?: number;
-        }
-    ]
+    offers: Offer[];
 }

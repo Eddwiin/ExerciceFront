@@ -11,6 +11,9 @@ export function shoppingCartReducer(state: BookModel[] = [], action: ShoppingCar
         case ShoppingCartAction.REMOVE_IN_SHOPPING_CART:
             return state.filter(((book: BookModel) => book.isbn !== action.payload));
 
+        case ShoppingCartAction.CLEAR_SHOPPING_CART:
+            return state = [];
+
         default:
             return state;
     }

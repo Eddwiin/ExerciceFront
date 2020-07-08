@@ -40,8 +40,8 @@ export class BooksComponent implements OnInit {
 
   addInShoppingCart(book: BookModel) {
     this.store.dispatch(new ShoppingCartActions.AddInShoppingCart(book));
-    this._shoppingBadgeNotif.updateItem(1);
-    this._snackBar.open("Le livre a été ajouté dans votre panier !", undefined, {
+    this._shoppingBadgeNotif.addItem();
+    this._snackBar.open('Le livre a été ajouté dans votre panier !', undefined, {
       duration: 1000
     });
   }
