@@ -55,6 +55,12 @@
         }
       }
     }
+
+    &__empty {
+      @include center;
+      font-size: 3.5rem;
+      font-style: italic;
+    }
   }
 
   &__footer {

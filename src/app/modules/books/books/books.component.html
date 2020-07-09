@@ -1,9 +1,9 @@
-<div *ngIf="(books$ | async) as books" class="books">
+<div *ngIf="books$ | async as books" class="books">
   <div class="books__autocomplete">
     <app-autocomplete
       [items]="convertBooksForAuto(books)"
       (inputChangedEvent)="inputChangedEvent($event)"
-      (suggestionSelectedEvent)="suggestionSelectedEvent($event)"
+      (suggestionSelectedEvent)="suggestionSelectedEvent(books, $event)"
     ></app-autocomplete>
   </div>
 

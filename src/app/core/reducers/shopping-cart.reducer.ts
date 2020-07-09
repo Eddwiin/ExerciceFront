@@ -1,8 +1,10 @@
 import * as ShoppingCartAction from '@core/actions/shopping-cart.actions';
 import { BookModel } from '@core/models/book.model';
 
+const initialState = [];
+
 export function shoppingCartReducer(
-  state: BookModel[] = [],
+  state: BookModel[] = initialState,
   action: ShoppingCartAction.Actions
 ) {
   switch (action.type) {
@@ -13,7 +15,7 @@ export function shoppingCartReducer(
       return state.filter((book: BookModel) => book.isbn !== action.payload);
 
     case ShoppingCartAction.CLEAR_SHOPPING_CART:
-      return (state = []);
+      return (state = initialState);
 
     default:
       return state;

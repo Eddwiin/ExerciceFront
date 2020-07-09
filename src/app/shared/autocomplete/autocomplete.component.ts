@@ -8,9 +8,9 @@ import {
   EventEmitter,
 } from '@angular/core';
 
-interface AutocompleteData {
+export interface AutocompleteData {
   id: string | number;
-  label: string;
+  title: string;
 }
 
 @Component({
@@ -39,9 +39,9 @@ export class AutocompleteComponent implements OnInit, OnChanges {
     }
   }
 
-  searchType(event) {
+  searchType(event): void {
     this.itemsCopy = this.items.filter((item) => {
-      if (item.label.toLowerCase().includes(event.target.value.toLowerCase())) {
+      if (item.title.toLowerCase().includes(event.target.value.toLowerCase())) {
         return item;
       }
     });
@@ -49,8 +49,8 @@ export class AutocompleteComponent implements OnInit, OnChanges {
     this.inputChangedEvent.emit(this.itemsCopy);
   }
 
-  clickOnSuggestion(item: AutocompleteData) {
-    this.valueSelected = item.label;
+  clickOnSuggestion(item: AutocompleteData): void {
+    this.valueSelected = item.title;
     this.suggestionSelectedEvent.emit(item);
   }
 }

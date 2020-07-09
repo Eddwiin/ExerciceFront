@@ -9,6 +9,7 @@ import { BookService } from '@core/services/book.service';
 import * as ShoppingCartActions from '@core/actions/shopping-cart.actions';
 import { ShoppingBadgeNotifService } from '@core/services/shopping-badge-notif.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AutocompleteData } from '@app/shared/autocomplete/autocomplete.component';
 
 @Component({
   selector: 'app-books',
@@ -36,22 +37,31 @@ export class BooksComponent implements OnInit {
   }
 
   convertBooksForAuto = (books: BookModel[]) =>
-    books.map((book: BookModel) => ({
-      id: book.isbn,
-      label: book.title,
-      price: book.price,
-      cover: book.cover,
-      synopsis: book.synopsis,
+    books.map(({ isbn, title, price, cover, synopsis }) => ({
+      id: isbn,
+      title,
+      price,
+      cover,
+      synopsis,
     }));
 
-  inputChangedEvent = (books: BookModel[]) => (this.booksCopy = [...books]);
+  inputChangedEvent = (booksUpdated) =>
+    (this.booksCopy = booksUpdated.map(
+      ({ id, title, price, cover, synopsis }) => ({
+        isbn: id,
+        title,
+        price,
+        cover,
+        synopsis,
+      })
+    ));
 
-  suggestionSelectedEvent(item)  {
-    console.log(this.booksCopy)
-    console.log(this.booksCopy.filter((bookCurrent) => item.id === bookCurrent.isbn));
-  }
+  suggestionSelectedEvent = (
+    booksOriginal: BookModel[],
+    item: AutocompleteData
+  ) => (this.booksCopy = booksOriginal.filter((book) => book.isbn === item.id));
 
-  addInShoppingCart(book: BookModel) {
+  addInShoppingCart(book: BookModel): void {
     this.store.dispatch(new ShoppingCartActions.AddInShoppingCart(book));
     this._shoppingBadgeNotif.addItem();
     this._snackBar.open(

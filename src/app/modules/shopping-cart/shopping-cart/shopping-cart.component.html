@@ -25,7 +25,15 @@
       </div>
     </div>
 
-    <ng-template [ngIf]="shoppingCart.bookGroup.length > 0">
+    <div *ngIf="shoppingCart.bookGroup.length === 0;then emptyMessageTemp else shoppingCartTemp"></div>
+
+    <ng-template #emptyMessageTemp>
+      <div class="shopping-cart__content__empty">
+        Votre panier est vide
+      </div>
+    </ng-template>
+
+    <ng-template #shoppingCartTemp>
       <div class="shopping-cart__footer">
         <span class="shopping-cart__footer__price-total"
           >Montant total: {{ totalPrice | currency: "EUR" }}</span

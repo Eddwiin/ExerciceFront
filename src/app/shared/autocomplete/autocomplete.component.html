@@ -6,6 +6,7 @@
     name="autocomplete"
     type="text"
     [placeholder]="placeholder"
+    autocomplete="off"
   />
   <ul class="autocomplete__content">
     <li
@@ -14,7 +15,7 @@
       #appAutocompleteContent
       (click)="clickOnSuggestion(item)"
     >
-      {{ item.label }}
+      {{ item.title }}
     </li>
   </ul>
 </div>
