@@ -9,7 +9,7 @@ export function bookReducer(
 ) {
   switch (action.type) {
     case BookActions.ADD_BOOKS:
-      return state.concat(action.payload);
+      return [...state, ...action.payload];
 
     default:
       return state;
